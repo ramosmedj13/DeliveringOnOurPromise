@@ -1,0 +1,83 @@
+@startuml
+
+'Classes
+class Shell {
+    - {field} PromiseHistoryClient phClient
+    - {field} ATAUserHandler inputHandler
+    + {method} {static} void main()
+    ~ {method} String handleUserRequest()
+    - {method} String renderPromiseHistoryTable(PromiseHistory promiseHistory)
+    - {method} String renderOrderTable(Order order)
+    ~ {method} boolean userHasAnotherRequest()
+    - {method} void processCommandLineArgs(String[] args)
+    - {method} String renderFixtures()
+
+}
+
+class PromiseHistoryClient {
+    - {field} GetPromiseHistoryByOrderIdActivity getPromiseHistoryByOrderIdActivity
+    + {method} PromiseHistory getPromiseHistoryByOrderId(String orderId)
+}
+
+class GetPromiseHistoryByOrderIdActivity {
+    - {field} ReadOnlyDao<String, Order> orderDao
+    - {field} ReadOnlyDao<String, List<Primise>> "PromiseDAO"
+    + {method} PromiseHistory getPromiseHistorybyOrderId(String orderId)
+}
+class OrderDao {
+    - {field} OrderManipulationAuthorityclient omaClient
+    + {method} Order get(String orderId)
+    - {method} OrderItem convertToOrderItem(OrderResultItem orderResultItem)
+}
+class PromiseDao {
+    - {field} DeliveryPromiseServiceClient dpsClient
+    - {field} OrderManipulationAuthorityclient omaClient
+    + {method} List<Promise> get(String customerOrderItemId)
+    - {method} ZonedDateTime getDeliveryDateForOrderItem(String customerOrderItemId)
+}
+class OrderManipulationAuthorityClient {
+    - {field} OrderDatastore orderDatastore
+    + {method} OrderResult getCustomerOrderByOrderId(String orderId)
+    + {method} OrderResultItem getCustomerOrderItemByOrderItemId(String orderItemId)
+    - {method} OrderResult convertOrderDataToOrderResults(OrderData orderData)
+    - {method} OrderShipment convertOrderShipmentDataToOrderResultShipment(OrderShipmentData orderShipmentData)
+    - {method} OrderShipment.ShipmentItem convertShipmentItemDataToShipmentItem(OrderShipmentData.CustomerShipmentItemData shipmentItemData)
+    - {method} OrderResultItem convertOrderItemDataToOrderResultItem(OrderItemData orderItemData)
+}
+class DeliveryPromise\nServiceClient {
+    - {field} DeliveryPromiseService dpService
+    + {method} Promise getDeliveryPromiseByOrderItemId(String customerOrderItemId)
+}
+
+class App {
+    + {method} {static} PromiseHistoryClient getPromistHistoryClient()
+    + {method} {static} GetPromiseHistoryByOrderIdActivity getPromiseHistoryByOrderIdActivity()
+    + {method} {static} OrderDao getOrderDao()
+    + {method} {static} PromiseDao getPromiseDao()
+    + {method} {static} OrderManipulationAuthorityclient getOrderManipulationAuthorityclient()
+    + {method} {static} DeliveryPromiseServiceClient getDeliveryPromiseServiceClient()
+    + {method} {static} OrderManipulationAuthority getOrderManipulationAuthority()
+    + {method} {static} DeliveryPromiseService getDeliveryPromiseService()
+    + {method} {static} OrderDatastore getOrderDatastore()
+
+}
+
+interface ReadOnlyDao {
+    {method} get(I orderId)
+}
+
+'Relationships
+Shell --* PromiseHistoryClient
+PromiseHistoryClient *-- GetPromiseHistoryByOrderIdActivity
+GetPromiseHistoryByOrderIdActivity *-- OrderDao
+OrderDao *-- OrderManipulationAuthorityClient
+OrderDao ..|> ReadOnlyDao
+PromiseDao ..|> ReadOnlyDao
+GetPromiseHistoryByOrderIdActivity *-- PromiseDao
+PromiseDao *-- DeliveryPromiseServiceClient
+PromiseDao *-- OrderManipulationAuthorityClient
+PromiseHistory *-- Order
+PromiseHistory *-- Promise
+Order *-- OrderItem
+
+@enduml
