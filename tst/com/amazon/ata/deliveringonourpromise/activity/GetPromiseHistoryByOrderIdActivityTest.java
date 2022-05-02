@@ -43,6 +43,28 @@ public class GetPromiseHistoryByOrderIdActivityTest {
     }
 
     @Test
+    public void getPromiseHistoryByOrderId_orderWithoutId_returnsPromiseAsNull() {
+        // GIVEN
+        String orderId = "111-749023-7630574";
+
+        // WHEN
+        PromiseHistory history = activity.getPromiseHistoryByOrderId(orderId);
+
+        // THEN
+        boolean foundOrderId = true;
+        for (Promise promise : history.getPromises()) {
+            if (promise.getPromiseProvidedBy().equals("111-749023-7630574")) {
+                foundOrderId = false;
+            }
+        }
+        assertTrue(foundOrderId,
+                String.format("Expected to find order ID '%s', but order is null.",
+                        orderId
+                )
+        );
+    }
+
+    @Test
     public void getPromiseHistoryByOrderId_orderWithDpsPromise_returnsDpsPromise() {
         // GIVEN - an order that hasn't shipped yet but should return a DPS promise
         String orderId = "900-3746401-0000001";

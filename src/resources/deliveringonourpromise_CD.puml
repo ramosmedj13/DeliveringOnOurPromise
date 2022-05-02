@@ -2,63 +2,63 @@
 
 'Classes
 class Shell {
-    - {field} PromiseHistoryClient phClient
-    - {field} ATAUserHandler inputHandler
+    - {field} phClient : PromiseHistoryClient
+    - {field} inputHandler : ATAUserHandler
     + {method} {static} void main()
-    ~ {method} String handleUserRequest()
-    - {method} String renderPromiseHistoryTable(PromiseHistory promiseHistory)
-    - {method} String renderOrderTable(Order order)
-    ~ {method} boolean userHasAnotherRequest()
-    - {method} void processCommandLineArgs(String[] args)
-    - {method} String renderFixtures()
+    ~ {method} handleUserRequest() : String
+    - {method} renderPromiseHistoryTable(PromiseHistory promiseHistory) : String
+    - {method} renderOrderTable(Order order) : String
+    ~ {method} userHasAnotherRequest() : boolean
+    - {method} processCommandLineArgs(String[] args) : void
+    - {method} renderFixtures() : String
 
 }
 
 class PromiseHistoryClient {
-    - {field} GetPromiseHistoryByOrderIdActivity getPromiseHistoryByOrderIdActivity
-    + {method} PromiseHistory getPromiseHistoryByOrderId(String orderId)
+    - {field} getPromiseHistoryByOrderIdActivity : GetPromiseHistoryByOrderIdActivity
+    + {method} getPromiseHistoryByOrderId(String orderId) : PromiseHistory
 }
 
 class GetPromiseHistoryByOrderIdActivity {
     - {field} ReadOnlyDao<String, Order> orderDao
     - {field} ReadOnlyDao<String, List<Primise>> "PromiseDAO"
-    + {method} PromiseHistory getPromiseHistorybyOrderId(String orderId)
+    + {method} getPromiseHistorybyOrderId(String orderId) : PromiseHistory
 }
 class OrderDao {
-    - {field} OrderManipulationAuthorityclient omaClient
-    + {method} Order get(String orderId)
-    - {method} OrderItem convertToOrderItem(OrderResultItem orderResultItem)
+    - {field} omaClient : OrderManipulationAuthorityClient
+    + {method} get(String orderId) : Order
+    - {method} convertToOrderItem(OrderResultItem orderResultItem) : OrderItem
 }
 class PromiseDao {
-    - {field} DeliveryPromiseServiceClient dpsClient
-    - {field} OrderManipulationAuthorityclient omaClient
-    + {method} List<Promise> get(String customerOrderItemId)
-    - {method} ZonedDateTime getDeliveryDateForOrderItem(String customerOrderItemId)
+    - {field} dpsClient : DeliveryPromiseServiceClient
+    - {field} omaClient : OrderManipulationAuthorityClient
+    + {method} get(String customerOrderItemId) : List<Promise>
+    - {method} getDeliveryDateForOrderItem(String customerOrderItemId) : ZonedDateTime
 }
 class OrderManipulationAuthorityClient {
-    - {field} OrderDatastore orderDatastore
-    + {method} OrderResult getCustomerOrderByOrderId(String orderId)
-    + {method} OrderResultItem getCustomerOrderItemByOrderItemId(String orderItemId)
-    - {method} OrderResult convertOrderDataToOrderResults(OrderData orderData)
-    - {method} OrderShipment convertOrderShipmentDataToOrderResultShipment(OrderShipmentData orderShipmentData)
-    - {method} OrderShipment.ShipmentItem convertShipmentItemDataToShipmentItem(OrderShipmentData.CustomerShipmentItemData shipmentItemData)
-    - {method} OrderResultItem convertOrderItemDataToOrderResultItem(OrderItemData orderItemData)
+    - {field} orderDatastore : OrderDatastore
+    + {method} getCustomerOrderByOrderId(String orderId) : OrderResult
+    + {method} getCustomerOrderItemByOrderItemId(String orderItemId) : OrderResultItem
+    - {method} convertOrderDataToOrderResults(OrderData orderData) : OrderResult
+    - {method} convertOrderShipmentDataToOrderResultShipment(OrderShipmentData orderShipmentData) : OrderShipment
+    - {method} convertShipmentItemDataToShipmentItem(OrderShipmentData.CustomerShipmentItemData shipmentItemData) : OrderShipment.ShipmentItem
+    - {method} convertOrderItemDataToOrderResultItem(OrderItemData orderItemData) : OrderResultItem
 }
 class DeliveryPromise\nServiceClient {
-    - {field} DeliveryPromiseService dpService
-    + {method} Promise getDeliveryPromiseByOrderItemId(String customerOrderItemId)
+    - {field} dpService : DeliveryPromiseService
+    + {method} getDeliveryPromiseByOrderItemId(String customerOrderItemId) : Promise
 }
 
 class App {
-    + {method} {static} PromiseHistoryClient getPromistHistoryClient()
-    + {method} {static} GetPromiseHistoryByOrderIdActivity getPromiseHistoryByOrderIdActivity()
-    + {method} {static} OrderDao getOrderDao()
-    + {method} {static} PromiseDao getPromiseDao()
-    + {method} {static} OrderManipulationAuthorityclient getOrderManipulationAuthorityclient()
-    + {method} {static} DeliveryPromiseServiceClient getDeliveryPromiseServiceClient()
-    + {method} {static} OrderManipulationAuthority getOrderManipulationAuthority()
-    + {method} {static} DeliveryPromiseService getDeliveryPromiseService()
-    + {method} {static} OrderDatastore getOrderDatastore()
+    + {method} {static} getPromiseHistoryClient() : PromiseHistoryClient
+    + {method} {static} getPromiseHistoryByOrderIdActivity() : GetPromiseHistoryByOrderIdActivity
+    + {method} {static} getOrderDao() : OrderDao
+    + {method} {static} getPromiseDao() : PromiseDao
+    + {method} {static} getOrderManipulationAuthorityClient() : OrderManipulationAuthorityClient
+    + {method} {static} getDeliveryPromiseServiceClient() : DeliveryPromiseServiceClient
+    + {method} {static} getOrderManipulationAuthority() : OrderManipulationAuthority
+    + {method} {static} getDeliveryPromiseService() : DeliveryPromiseService
+    + {method} {static} getOrderDatastore() : OrderDatastore
 
 }
 
