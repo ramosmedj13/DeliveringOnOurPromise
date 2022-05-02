@@ -19,7 +19,7 @@ public class OrderDaoTest {
     }
 
     @Test
-    public void get_ForKnownOrderId_returnsOrder() {
+    public void get_forKnownOrderId_returnsOrder() {
         // GIVEN
         String orderId = "900-3746401-0000001";
 
@@ -31,7 +31,7 @@ public class OrderDaoTest {
     }
 
     @Test
-    public void get_ForUnKnownOrderId_returnsOrder() {
+    public void get_forUnknownOrderId_returnsOrder() {
         // GIVEN
         String orderId = "invalid";
 
