@@ -2,8 +2,6 @@ package com.amazon.ata.deliveringonourpromise.dao;
 
 import com.amazon.ata.deliveringonourpromise.App;
 import com.amazon.ata.deliveringonourpromise.types.Order;
-import com.amazon.ata.deliveringonourpromise.types.Promise;
-import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
