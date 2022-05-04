@@ -28,6 +28,10 @@ public class OrderFulfillmentService {
         this.deliveryPromiseService = deliveryPromiseService;
     }
 
+    public OrderFulfillmentService(OrderDatastore orderDatastore) {
+        this.orderDatastore = orderDatastore;
+    }
+
     /**
      * Returns the OrderPromise for the given order item, if any such promise exists.
      *
