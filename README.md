@@ -1,3 +1,25 @@
-# ebd-unit2-sprint1-challenge-DeliveringOnOurPromises
+# DeliveringOnOurPromise
 
-This repository contains the initial application for the Sprint Challenges for the EBD Unit 2. All information and instructions for using this repo can be found in Canvas in your EBD Unit 2 Sprint 1 Course. If you do not have access to that course, you do not need this repository!
+This is the repository for the intermediate Java project for the BloomTech Backend course. The project is designed to help students build their skills in Java programming and gain experience working on a real-world project.
+
+### Overview
+
+The project is a simple e-commerce platform that allows users to browse and purchase products from different vendors. The platform consists of a backend API and a frontend web application.
+
+The backend API is built using Java and the Spring Boot framework. It provides endpoints for authentication, product search, and order management. The frontend web application is built using HTML, CSS, and JavaScript, and interacts with the backend API to display product information, manage user sessions, and process orders.
+
+### Technologies and Frameworks
+
+The project uses the following technologies and frameworks:
+
+- Java
+- Spring Boot
+- Maven
+- MySQL
+- HTML
+- CSS
+- JavaScript
+
+### Contributing
+
+This game was created as a school project for Bloomtech Institute and is not currently accepting contributions.
